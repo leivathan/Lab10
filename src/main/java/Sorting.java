@@ -32,7 +32,20 @@ public class Sorting {
      */
     @SuppressWarnings("unused")
     private static int[] bubbleSort(final int[] array) {
-        return null;
+        boolean ran = false;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] < array[i - 1]) {
+                int temp = array[i];
+                array[i] = array[i - 1];
+                array[i - 1] = temp;
+                ran = true;
+            }
+        }
+        if (!ran) {
+            return array;
+        }
+        bubbleSort(array);
+        return array;
     }
 
     /**
@@ -43,7 +56,50 @@ public class Sorting {
      */
     @SuppressWarnings("unused")
     private static int[] selectionSort(final int[] array) {
-        return null;
+        sort(array, 0, array.length - 1);
+        return array;
+    }
+
+    /**
+     *
+     * @param data wham
+     * @param lo bam
+     * @param hi thank yu maam
+     */
+    public static void sort(final int[] data, final int lo, final int hi) {
+        if (lo < hi) {
+            swap(data, lo, findMin(data));
+            sort(data, lo + 1, hi);
+        }
+    }
+
+
+    /**
+     *
+     * @param array the array
+     * @return the minimum
+     */
+    private static int findMin(final int[] array) {
+        int min;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i - 1] < array[i]) {
+                min = i - 1;
+            } else {
+                min = i;
+            }
+        }
+    }
+
+    /**
+     *
+     * @param array the array
+     * @param bott the lower value position
+     * @param top the upper value position
+     */
+    private static void swap(final int[] array, final int bott, final int top) {
+        int temp = array[top];
+        array[top] = array[bott];
+        array[bott] = temp;
     }
 
     /**
@@ -54,7 +110,21 @@ public class Sorting {
      */
     @SuppressWarnings("unused")
     private static int[] mergeSort(final int[] array) {
-        return null;
+        if (array.length == 1) {
+            return array;
+        }
+        int mid = array.length / 2;
+        int[] small = new int[mid];
+        int[] big = new int[mid];
+        for (int i = 0; i < mid; i++) {
+            small[i] = array[i];
+        }
+        for (int i = mid; i < array.length; i++) {
+            big[i] = array[i];
+        }
+        mergeSort(small);
+        mergeSort(big);
+        return (merge(small, big));
     }
 
     /**
